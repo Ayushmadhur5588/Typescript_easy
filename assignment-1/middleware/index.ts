@@ -1,12 +1,10 @@
-const jwt = require('jsonwebtoken');
-const { Response } = require('express');
-const SECRET = 'SECr3t';  // This should be in an environment variable in a real application
+import jwt from "jsonwebtoken";
 
-const authenticateJwt = (req, res, next) => {
+export const authenticateJwt = (req, res, next) => {
   const authHeader = req.headers.authorization;
   if (authHeader) {
-    const token = authHeader.split(' ')[1];
-    jwt.verify(token, SECRET, (err, user) => {
+    const token = authHeader.split(" ")[1];
+    jwt.verify(token, process.env.SECRET, (err, user) => {
       if (err) {
         return res.sendStatus(403);
       }
@@ -18,8 +16,3 @@ const authenticateJwt = (req, res, next) => {
     res.sendStatus(401);
   }
 };
-
-module.exports = {
-    authenticateJwt,
-    SECRET
-}
