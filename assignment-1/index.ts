@@ -11,6 +11,7 @@ app.use(express.json());
 app.use("/auth", authRoutes);
 app.use("/todo", todoRoutes);
 
+
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 })
